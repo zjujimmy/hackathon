@@ -7,14 +7,15 @@
     // Parses returned response and extracts
     // the title, links, and text of each news story.
     function top_stories(o){      
-  var items = o.query.results.Result;
+  var items = o.query.results.video;
   var output = '';
   var no_items=items.length;
   for(var i=0;i<no_items;i++){
-    var title = items[i].Title;
-    var link = items[i].Url; 
-    var desc = items[i].Rating.LastReviewIntro;
-    output += "<h3><a href='" + link + "'>"+title+"</a></h3>" + desc + "<hr/>";      
+    var title = items[i].title;
+    var link = items[i].url; 
+    var id = items[i].id;
+    output += "<h3><a href='" + link + "'>"+title+"</a></h3>" + id + "<hr/>"; 
+    output += "<img alt='缩略图'' src='" + items[i].thumbnails.thumbnail[0].content + "' width='185'>";     
   }
   document.getElementById('results').innerHTML = output;  }
     </script>
@@ -23,6 +24,6 @@
     <!-- Div tag for stories results -->
     <div id='results'></div>
     <!-- The YQL statment will be assigned to src. -->
-    <script src='http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22sushi%22%20and%20location%3D%22san%20francisco%2C%20ca%22&format=json&callback=top_stories'></script>
+    <script src='http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20youtube.search%20where%20query%3D%22louis%20ck%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=top_stories'></script>
   </body>
 </html>
